@@ -114,14 +114,20 @@
                 </ul>
                 <!-- END BREADCRUMB -->                
                              
-                                <!-- PAGE CONTENT WRAPPER -->
+                <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">
                     <div class="row">
                         <div class="col-md-12">
+                            
                             <!-- START jVectorMap World -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Visitors By Location</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>
                                 </div>
                                 <div class="panel-body panel-body-map">
                                     <div id="vector_world_map" style="width: 100%; height: 300px"></div>
@@ -214,11 +220,6 @@
         <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/bootstrap/bootstrap.min.js" />"></script>
         <!-- END PLUGINS -->
 
-        <!-- START THIS PAGE PLUGINS       
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" />"></script>
-        -->
-        
         <!-- Experimental -->
         <script type='text/javascript' src='http://jvectormap.com/js/jquery-jvectormap-2.0.3.min.js'></script>
         <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" />"></script>

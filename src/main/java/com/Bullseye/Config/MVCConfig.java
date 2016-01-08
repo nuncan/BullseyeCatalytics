@@ -47,9 +47,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter
         return new BCryptPasswordEncoder();
     }
     
-/*
-    HIBERNATE
-*/
     @Bean
     public SessionFactory sessionFactory()
     {

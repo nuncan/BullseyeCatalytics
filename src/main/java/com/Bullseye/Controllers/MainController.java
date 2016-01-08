@@ -97,7 +97,7 @@ public class MainController
         this.hUserService.addByEntity(UserRegistartionData);
 
         // Redirect Client Back To Their Page
-        return "redirect:/Login";
+        return "forward:/Login";
     }
 
     //
@@ -125,7 +125,7 @@ public class MainController
 	if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
 	}
-	return "redirect:/Login?LoggedOut";
+	return "forward:/Login?LoggedOut";
     }
 
     //
