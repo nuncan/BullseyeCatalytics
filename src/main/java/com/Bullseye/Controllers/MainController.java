@@ -7,7 +7,6 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.Bullseye.Models.Service.UserService;
-import com.Bullseye.Models.Settings;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.security.core.Authentication;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
@@ -27,6 +27,9 @@ public class MainController
     
     @Autowired
     MapperFacade autoMapper;
+    
+    @Autowired
+    BCryptPasswordEncoder getBCryptPasswordEncoder;
     
     //
     //  Index Page
@@ -79,22 +82,19 @@ public class MainController
     //  User Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
-    public String Register_POST(ModelMap DInjMap, @Valid User hClientRegDTO, BindingResult hBindResult)
+    public String Register_POST(ModelMap DInjMap, @Valid User UserRegistartionData, BindingResult hBindResult)
     {
-        // Check If Client Submitted Bad Data, If So, Redirect And Try Again
+        // Check If User Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
             return "Register?Error";
         }
         
-        // Automap The DTO To A New User Entity
-        User hUser = autoMapper.map(hClientRegDTO, User.class);
-        
-        Settings hSettings = new Settings("English");
-        
-        hUser.setSettings(hSettings);
+        // Automap The Recieved Data To A User Object
+//        User hUser = autoMapper.map(UserRegistartionData, User.class);
+        UserRegistartionData.setPassword(getBCryptPasswordEncoder.encode(UserRegistartionData.getPassword()));
         
         // Finally, We Save The New User Entity
-        this.hUserService.addByEntity(hUser);
+        this.hUserService.addByEntity(UserRegistartionData);
 
         // Redirect Client Back To Their Page
         return "redirect:/Login";

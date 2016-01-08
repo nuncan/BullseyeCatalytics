@@ -33,7 +33,7 @@ public class User implements Serializable
     
     public User()
     {
-        
+        this.Settings = new Settings("English");
     }
     
     public User(String argUsername, String argEmail, String argPassword)
