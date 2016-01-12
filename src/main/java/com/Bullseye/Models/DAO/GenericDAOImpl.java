@@ -46,7 +46,7 @@ public abstract class GenericDAOImpl <E, K extends Serializable> extends Abstrac
     }
     
     @Override
-    public E findByID(int argID, boolean isAPI)
+    public E findByID(int argID)
     {
         return (E)getSession().load(persistentClass, argID);
     }

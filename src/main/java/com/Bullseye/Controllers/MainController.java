@@ -2,7 +2,6 @@ package com.Bullseye.Controllers;
 
 import javax.validation.Valid;
 import com.Bullseye.Models.User;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +25,6 @@ public class MainController
     UserService hUserService;
     
     @Autowired
-    MapperFacade autoMapper;
-    
-    @Autowired
     BCryptPasswordEncoder getBCryptPasswordEncoder;
     
     //
@@ -40,6 +36,17 @@ public class MainController
         model.addAttribute("user", getPrincipal());
         return "Index";
     }
+    
+    //
+    //  Install Page
+    //
+    @RequestMapping(value = "/Install", method = RequestMethod.GET)
+    public String Install_GET(ModelMap model)
+    {
+
+	return "Index";
+    }
+    
     
     //
     //  Dashboard Page
@@ -82,22 +89,22 @@ public class MainController
     //  User Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
-    public String Register_POST(ModelMap DInjMap, @Valid User UserRegistartionData, BindingResult hBindResult)
+    public String Register_POST(@Valid User UserRegistartionData, BindingResult hBindResult)
     {
         // Check If User Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
-            return "Register?Error";
+            return "forward:/Register?Error";
         }
         
-        // Automap The Recieved Data To A User Object
-//        User hUser = autoMapper.map(UserRegistartionData, User.class);
-        UserRegistartionData.setPassword(getBCryptPasswordEncoder.encode(UserRegistartionData.getPassword()));
+        // Encode The Password
+//      UserRegistartionData.setPassword(getBCryptPasswordEncoder.encode(UserRegistartionData.getPassword()));
         
         // Finally, We Save The New User Entity
         this.hUserService.addByEntity(UserRegistartionData);
+        
 
-        // Redirect Client Back To Their Page
-        return "forward:/Login";
+        // Redirect Client Back To Their Page (Notice: You HAVE To Redirect, A Forward Will Also Do A POST)
+        return "redirect:/Login";
     }
 
     //
@@ -107,6 +114,7 @@ public class MainController
     public String Login_GET()
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
         // Check If The User Is Already Logged In
         if (!(auth instanceof AnonymousAuthenticationToken))
         {

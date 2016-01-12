@@ -27,8 +27,8 @@
             <div class="login-box animated fadeInDown">
                 <div class="login-logo"></div>
                 <div class="login-body">
-                    <c:url var="registrationURL" value="/Register" />
-                    <form id="Registration_Form" role="form" class="form-horizontal" action="${registrationURL}" method="POST">
+                    <c:url var="registrationUrl" value="/Register" />
+                    <form id="Registration_Form" name="Registration_Form" action="${registrationUrl}" method='post' class="form-horizontal">
                         <c:if test="${param.Error != null}">
                             <div class="alert alert-danger">
                                 <p>An Error Occured, Please Try Again.</p>

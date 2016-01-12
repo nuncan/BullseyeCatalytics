@@ -43,9 +43,9 @@ public abstract class GenericServiceImpl<E, K> implements GenericService<E, K>
     
     @Override
     @Transactional
-    public E findByID(int argID, boolean isAPI)
+    public E findByID(int argID)
     {
-        return(genericDAO.findByID(argID, isAPI));
+        return(genericDAO.findByID(argID));
     }
     
     @Override

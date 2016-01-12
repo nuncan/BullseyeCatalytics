@@ -5,9 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "Users")
@@ -28,19 +26,15 @@ public class User implements Serializable
     @Column(name = "Password")
     private String Password;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Settings Settings;
+    @Column(name = "Status")
+    private String Status = "Active";
     
+    @Column(name = "Role")
+    private String Role = "CLIENT";
+
     public User()
     {
-        this.Settings = new Settings("English");
-    }
-    
-    public User(String argUsername, String argEmail, String argPassword)
-    {
-        this.Username = argUsername;
-        this.Email = argEmail;
-        this.Password = argPassword;
+        
     }
 
     public int getID() {
@@ -75,11 +69,21 @@ public class User implements Serializable
         this.Password = Password;
     }
 
-    public Settings getSettings() {
-        return Settings;
+    public String getStatus() {
+        return Status;
     }
 
-    public void setSettings(Settings Settings) {
-        this.Settings = Settings;
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String Role) {
+        this.Role = Role;
+    }
+
+    
 }
