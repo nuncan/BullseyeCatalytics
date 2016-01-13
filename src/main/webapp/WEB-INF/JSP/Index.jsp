@@ -9,10 +9,8 @@
         <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/Resources/Images/favicon.png" />">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <c:if test="${not empty user}">
-            </br>You Are Identified As: <strong>${user}</strong>
-        </c:if>
+        <h1>Hello <strong>${user}</strong></h1>
+        <a href="<c:url value="/Install"/>">Install</a>
         <br/>
         <a href="<c:url value="/Dashboard"/>">Dashboard</a>
         <br/>
@@ -23,5 +21,7 @@
         <a href="<c:url value="/Register"/>">Register</a>
         <br/>
         <a href="<c:url value="/Logout"/>">Logout</a>
+        <br/>
+        <strong>${RoleList}</strong>
     </body>
 </html>

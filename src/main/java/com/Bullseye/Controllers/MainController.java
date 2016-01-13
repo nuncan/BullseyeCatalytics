@@ -1,11 +1,13 @@
 package com.Bullseye.Controllers;
 
+import com.Bullseye.Models.DTO.UserRegistrationDTO;
 import javax.validation.Valid;
 import com.Bullseye.Models.User;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.Bullseye.Models.Service.UserService;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.security.core.Authentication;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
@@ -25,7 +26,7 @@ public class MainController
     UserService hUserService;
     
     @Autowired
-    BCryptPasswordEncoder getBCryptPasswordEncoder;
+    MapperFacade autoMapper;
     
     //
     //  Index Page
@@ -89,20 +90,21 @@ public class MainController
     //  User Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
-    public String Register_POST(@Valid User UserRegistartionData, BindingResult hBindResult)
+    public String Register_POST(@Valid UserRegistrationDTO UserRegistartionData, BindingResult hBindResult)
     {
         // Check If User Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
             return "forward:/Register?Error";
         }
+       
+        // Automap Properties To A New User Object
+        User hUser = autoMapper.map(UserRegistartionData, User.class);
         
-        // Encode The Password
-//      UserRegistartionData.setPassword(getBCryptPasswordEncoder.encode(UserRegistartionData.getPassword()));
+        System.out.println("Dumping User Before We Persist: " + hUser.toString());
         
         // Finally, We Save The New User Entity
-        this.hUserService.addByEntity(UserRegistartionData);
+        this.hUserService.addByEntity(hUser);
         
-
         // Redirect Client Back To Their Page (Notice: You HAVE To Redirect, A Forward Will Also Do A POST)
         return "redirect:/Login";
     }
@@ -133,7 +135,7 @@ public class MainController
 	if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
 	}
-	return "forward:/Login?LoggedOut";
+	return "redirect:/Login?LoggedOut";
     }
 
     //

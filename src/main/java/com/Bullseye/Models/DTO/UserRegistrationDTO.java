@@ -1,47 +1,31 @@
-package com.Bullseye.Models;
+package com.Bullseye.Models.DTO;
 
-import javax.persistence.Id;
-import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
-@Entity
-@Table(name = "Users")
-public class User implements Serializable
+
+public class UserRegistrationDTO
 {
-    @Id
-    @GeneratedValue
-    
-    @Column(name = "User_ID", nullable = false, unique = true)
     private int ID;
     
-    @Column(name = "Username", nullable = false, unique = true)
+    @Size(min = 2, max = 32, message = "Username must be between 4 and 32 characters")
     private String Username;
     
-    @Column(name = "Email", nullable = false, unique = true)
+    @Email(message = "Must be an Email")
+    @Size(min = 6, max = 32, message = "Email must be between 6 and 32 characters")
     private String Email;
     
-    @Column(name = "Password", nullable = false)
+    @Size(min = 2, max = 32, message = "Password must be between 6 and 32 characters")
     private String Password;
     
-    @Column(name = "Role", nullable = false)
-    private String Role;
-    
-    @Column(name = "Enabled", nullable = false)
-    private boolean Enabled;
-    
-    @Column(name = "accountNonExpired", nullable = false)
-    private boolean accountNonExpired;
-    
-    @Column(name = "credentialsNonExpired", nullable = false)
-    private boolean credentialsNonExpired;
-    
-    @Column(name = "accountNonLocked", nullable = false)
-    private boolean accountNonLocked;
+    private boolean Enabled = true;
+    private boolean accountNonExpired = true;
+    private boolean credentialsNonExpired = true;
+    private boolean accountNonLocked = true;
+    private String Status = "Active";
+    private String Role = "CLIENT";
 
-    public User()
+    public UserRegistrationDTO()
     {
         
     }
@@ -78,14 +62,6 @@ public class User implements Serializable
         this.Password = Password;
     }
 
-    public String getRole() {
-        return Role;
-    }
-
-    public void setRole(String Role) {
-        this.Role = Role;
-    }
-
     public boolean isEnabled() {
         return Enabled;
     }
@@ -118,9 +94,20 @@ public class User implements Serializable
         this.accountNonLocked = accountNonLocked;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "ID=" + ID + ", Username=" + Username + ", Email=" + Email + ", Password=" + Password + ", Role=" + Role + ", Enabled=" + Enabled + ", accountNonExpired=" + accountNonExpired + ", credentialsNonExpired=" + credentialsNonExpired + ", accountNonLocked=" + accountNonLocked + '}';
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String Role) {
+        this.Role = Role;
     }
 
 }

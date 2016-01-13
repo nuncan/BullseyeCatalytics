@@ -28,13 +28,15 @@ public class CustomUserDetailsService implements UserDetailsService
         {
             throw new UsernameNotFoundException("Username not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getStatus().equals("Active"), true, true, true, getGrantedAuthorities(user));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), getGrantedAuthorities(user));
     }
  
+    /*
+        Returns A List Of Roles
+    */
     private List<GrantedAuthority> getGrantedAuthorities(User user)
     {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
         return authorities;
     }
