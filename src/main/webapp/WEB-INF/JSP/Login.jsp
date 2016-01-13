@@ -53,7 +53,11 @@
                     <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                     <div class="form-group">
                         <div class="col-md-6">
-                            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="remember_me" name="remember-me" type="checkbox"> Remember me
+                                </label>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <button class="btn btn-info btn-block">Log In</button>
@@ -66,9 +70,7 @@
                         &copy; 2015 Bullseye.com
                     </div>
                     <div class="pull-right">
-                        <a href="#">About</a> |
-                        <a href="#">Privacy</a> |
-                        <a href="#">Contact Us</a>
+                        <a href="<c:url value="/Register"/>">Register</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 package com.Bullseye.Models.Service;
 
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 import com.Bullseye.Models.DAO.UserDAO;
 import com.Bullseye.Models.DAO.GenericDAO;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
     To Access Data.
 */
 
-@Service("userService")
-public class UserServiceImpl extends GenericServiceImpl<User, Integer> implements UserService
+@Service("usersService")
+public class UserServiceImpl extends GenericServiceImpl<Users, Integer> implements UserService
 {
     private UserDAO userDAO;
     
@@ -25,7 +25,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
     }
     
     @Autowired
-    public UserServiceImpl(@Qualifier("userDAO") GenericDAO<User, Integer> genericDAO)
+    public UserServiceImpl(@Qualifier("usersDAO") GenericDAO<Users, Integer> genericDAO)
     {
         super(genericDAO);
         this.userDAO = (UserDAO)genericDAO;
@@ -36,18 +36,15 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
     //
     @Override
     @Transactional
-    public User getUserByEmail(String argEmail)
+    public Users getUserByEmail(String argEmail)
     {
         return(userDAO.getUserByEmail(argEmail));
     }
     
     @Override
     @Transactional
-    public User getUserByUsername(String argUsername)
+    public Users getUserByUsername(String argUsername)
     {
         return(userDAO.getUserByUsername(argUsername));
-    }
-    
-
-    
+    }    
 }

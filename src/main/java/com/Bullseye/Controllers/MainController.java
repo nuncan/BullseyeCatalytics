@@ -1,8 +1,9 @@
 package com.Bullseye.Controllers;
 
 import com.Bullseye.Models.DTO.UserRegistrationDTO;
+import com.Bullseye.Models.Service.RolesService;
 import javax.validation.Valid;
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,9 @@ public class MainController
     UserService hUserService;
     
     @Autowired
+    RolesService hRolesService;
+    
+    @Autowired
     MapperFacade autoMapper;
     
     //
@@ -34,20 +38,9 @@ public class MainController
     @RequestMapping(value = { "/", "/Index" }, method = RequestMethod.GET)
     public String Index_GET(ModelMap model)
     {
-        model.addAttribute("user", getPrincipal());
+        model.addAttribute("Username", getUsername());
         return "Index";
     }
-    
-    //
-    //  Install Page
-    //
-    @RequestMapping(value = "/Install", method = RequestMethod.GET)
-    public String Install_GET(ModelMap model)
-    {
-
-	return "Index";
-    }
-    
     
     //
     //  Dashboard Page
@@ -55,7 +48,7 @@ public class MainController
     @RequestMapping(value = { "/Dashboard" }, method = RequestMethod.GET)
     public String Dashboard_GET(ModelMap model)
     {
-        model.addAttribute("user", getPrincipal());
+        model.addAttribute("Username", getUsername());
         return "Dashboard";
     }
     
@@ -65,7 +58,7 @@ public class MainController
     @RequestMapping(value = "/Denied", method = RequestMethod.GET)
     public String Denied_GET(ModelMap model)
     {
-        model.addAttribute("user", getPrincipal());
+        model.addAttribute("Username", getUsername());
 	return "Denied";
     }
     
@@ -75,7 +68,7 @@ public class MainController
     @RequestMapping(value = "/Register", method = RequestMethod.GET)
     public String Register_GET()
     {
-        // Check If The User Is Already Logged In & If So, Then Redirect Them
+        // Check If The Users Is Already Logged In & If So, Then Redirect Them
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken))
         {
@@ -87,22 +80,20 @@ public class MainController
     
     //
     //  This Method Captures Data From The Registration Page Into A New
-    //  User Object Then Perists That Object Into The Database
+    //  Users Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
     public String Register_POST(@Valid UserRegistrationDTO UserRegistartionData, BindingResult hBindResult)
     {
-        // Check If User Submitted Bad Data, If So, Redirect And Try Again
+        // Check If Users Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
             return "forward:/Register?Error";
         }
        
-        // Automap Properties To A New User Object
-        User hUser = autoMapper.map(UserRegistartionData, User.class);
-        
-        System.out.println("Dumping User Before We Persist: " + hUser.toString());
-        
-        // Finally, We Save The New User Entity
+        // Automap Properties To A New Users Object
+        Users hUser = autoMapper.map(UserRegistartionData, Users.class);
+
+        // Finally, We Save The New Users Entity
         this.hUserService.addByEntity(hUser);
         
         // Redirect Client Back To Their Page (Notice: You HAVE To Redirect, A Forward Will Also Do A POST)
@@ -117,7 +108,7 @@ public class MainController
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         
-        // Check If The User Is Already Logged In
+        // Check If The Users Is Already Logged In
         if (!(auth instanceof AnonymousAuthenticationToken))
         {
             return "forward:/Dashboard";
@@ -139,9 +130,9 @@ public class MainController
     }
 
     //
-    //  Return User Information
+    //  Return Users Information
     //
-    private String getPrincipal()
+    private String getUsername()
     {
 	String userName;
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

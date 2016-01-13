@@ -1,9 +1,9 @@
 package com.Bullseye.Models.DAO;
 
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 
-public interface UserDAO extends GenericDAO<User, Integer>
+public interface UserDAO extends GenericDAO<Users, Integer>
 {
-    public User getUserByEmail(String argEmail);
-    public User getUserByUsername(String argUsername);
+    public Users getUserByEmail(String argEmail);
+    public Users getUserByUsername(String argUsername);
 }

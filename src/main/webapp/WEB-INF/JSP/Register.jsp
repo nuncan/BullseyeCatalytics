@@ -17,7 +17,7 @@
         <!-- END META SECTION -->
 
         <!-- CSS INCLUDE -->
-        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value="/Resources/CSS/theme-default.css" />" >
+        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value="/Resources/CSS/theme-dark.css" />" >
         <!-- EOF CSS INCLUDE -->
     </head>
     <body>
@@ -69,9 +69,6 @@
                 <div class="login-footer">
                     <div class="pull-left">
                         &copy; 2015 Bullseye.com
-                    </div>
-                    <div class="pull-right">
-                        <a href="#">About</a> | <a href="#">Contact Us</a>
                     </div>
                 </div>
             </div>

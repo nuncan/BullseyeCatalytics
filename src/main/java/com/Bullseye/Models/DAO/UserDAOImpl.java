@@ -1,6 +1,6 @@
 package com.Bullseye.Models.DAO;
 
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -12,22 +12,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
     This Layer Is Never To Be Accessed Directly
     Instead This Layer Is To Be Accessed Only By The Service Layer
 */
-@Repository("userDAO")
-public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements UserDAO
+@Repository("usersDAO")
+public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserDAO
 {
     @Autowired
     BCryptPasswordEncoder getBCryptPasswordEncoder;
     
     @Override
-    public User getUserByEmail(String argEmail)
+    public Users getUserByEmail(String argEmail)
     {
         Criteria crit = getSession().createCriteria(persistentClass);
         crit.add(Restrictions.eq("Email", argEmail));
         crit.setFirstResult(0);                     // Result 0 Is First Result
         crit.setMaxResults(1);                      // Result 1 Is Max Result
         // Check Result
-        if((User)crit.uniqueResult() != null) {
-            return (User)crit.uniqueResult();
+        if((Users)crit.uniqueResult() != null) {
+            return (Users)crit.uniqueResult();
         }
         else {
             throw new RuntimeException("No User With That Email Found");
@@ -35,15 +35,15 @@ public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements UserDA
     }
     
     @Override
-    public User getUserByUsername(String argUsername)
+    public Users getUserByUsername(String argUsername)
     {
         Criteria crit = getSession().createCriteria(persistentClass);
         crit.add(Restrictions.eq("Username", argUsername));
         crit.setFirstResult(0);                     // Result 0 Is First Result
         crit.setMaxResults(1);                      // Result 1 Is Max Result
         // Check Result
-        if((User)crit.uniqueResult() != null) {
-            return (User)crit.uniqueResult();
+        if((Users)crit.uniqueResult() != null) {
+            return (Users)crit.uniqueResult();
         }
         else {
             throw new RuntimeException("No User With That Username Found");

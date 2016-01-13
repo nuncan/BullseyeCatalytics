@@ -2,14 +2,18 @@ package com.Bullseye.Models;
 
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable
+public class Users implements Serializable
 {
     @Id
     @GeneratedValue
@@ -17,31 +21,31 @@ public class User implements Serializable
     @Column(name = "User_ID", nullable = false, unique = true)
     private int ID;
     
-    @Column(name = "Username", nullable = false, unique = true)
+    @Column(name = "User_Username", nullable = false, unique = true)
     private String Username;
     
-    @Column(name = "Email", nullable = false, unique = true)
+    @Column(name = "User_Email", nullable = false, unique = true)
     private String Email;
     
-    @Column(name = "Password", nullable = false)
+    @Column(name = "User_Password", nullable = false)
     private String Password;
     
-    @Column(name = "Role", nullable = false)
-    private String Role;
-    
-    @Column(name = "Enabled", nullable = false)
+    @Column(name = "User_Enabled", nullable = false)
     private boolean Enabled;
     
-    @Column(name = "accountNonExpired", nullable = false)
+    @Column(name = "User_accountNonExpired", nullable = false)
     private boolean accountNonExpired;
     
-    @Column(name = "credentialsNonExpired", nullable = false)
+    @Column(name = "User_credentialsNonExpired", nullable = false)
     private boolean credentialsNonExpired;
     
-    @Column(name = "accountNonLocked", nullable = false)
+    @Column(name = "User_accountNonLocked", nullable = false)
     private boolean accountNonLocked;
-
-    public User()
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Roles> User_Roles = new HashSet<Roles>();
+    
+    public Users()
     {
         
     }
@@ -78,14 +82,6 @@ public class User implements Serializable
         this.Password = Password;
     }
 
-    public String getRole() {
-        return Role;
-    }
-
-    public void setRole(String Role) {
-        this.Role = Role;
-    }
-
     public boolean isEnabled() {
         return Enabled;
     }
@@ -118,9 +114,11 @@ public class User implements Serializable
         this.accountNonLocked = accountNonLocked;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "ID=" + ID + ", Username=" + Username + ", Email=" + Email + ", Password=" + Password + ", Role=" + Role + ", Enabled=" + Enabled + ", accountNonExpired=" + accountNonExpired + ", credentialsNonExpired=" + credentialsNonExpired + ", accountNonLocked=" + accountNonLocked + '}';
+    public Set<Roles> getUser_Roles() {
+        return User_Roles;
     }
 
+    public void setUser_Roles(Set<Roles> User_Roles) {
+        this.User_Roles = User_Roles;
+    }
 }

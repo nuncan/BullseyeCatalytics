@@ -1,9 +1,9 @@
 package com.Bullseye.Models.Service;
 
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 
-public interface UserService extends GenericService<User, Integer>
+public interface UserService extends GenericService<Users, Integer>
 {
-    public User getUserByEmail(String argEmail);
-    public User getUserByUsername(String argUsername);
+    public Users getUserByEmail(String argEmail);
+    public Users getUserByUsername(String argUsername);
 }

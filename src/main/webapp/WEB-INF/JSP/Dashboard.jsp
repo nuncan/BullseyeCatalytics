@@ -39,15 +39,15 @@
                     </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
-                            <img src="<c:url value="/Resources/Images/default_avatar.png" />" alt="John Doe"/>
+                            <img src="<c:url value="/Resources/Images/default_avatar.png" />"/>
                         </a>
                         <div class="profile">
                             <div class="profile-image">
-                                <img src="<c:url value="/Resources/Images/default_avatar.png" />" alt="John Doe"/>
+                                <img src="<c:url value="/Resources/Images/default_avatar.png" />"/>
                             </div>
                             <div class="profile-data">
-                                <div class="profile-data-name">John Doe</div>
-                                <div class="profile-data-title">Web Developer/Designer</div>
+                                <div class="profile-data-name">${Username}</div>
+                                <div class="profile-data-title">Beta Tester</div>
                             </div>
                             <div class="profile-controls">
                                 <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>

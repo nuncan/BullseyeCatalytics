@@ -1,5 +1,8 @@
 package com.Bullseye.Models.DTO;
 
+import com.Bullseye.Models.Roles;
+import java.util.HashSet;
+import java.util.Set;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
@@ -22,9 +25,8 @@ public class UserRegistrationDTO
     private boolean accountNonExpired = true;
     private boolean credentialsNonExpired = true;
     private boolean accountNonLocked = true;
-    private String Status = "Active";
-    private String Role = "CLIENT";
-
+    private Set<Roles> User_Roles = new HashSet<Roles>();
+    
     public UserRegistrationDTO()
     {
         
@@ -94,20 +96,11 @@ public class UserRegistrationDTO
         this.accountNonLocked = accountNonLocked;
     }
 
-    public String getStatus() {
-        return Status;
+    public Set<Roles> getUser_Roles() {
+        return User_Roles;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public void setUser_Roles(Set<Roles> User_Roles) {
+        this.User_Roles = User_Roles;
     }
-
-    public String getRole() {
-        return Role;
-    }
-
-    public void setRole(String Role) {
-        this.Role = Role;
-    }
-
 }

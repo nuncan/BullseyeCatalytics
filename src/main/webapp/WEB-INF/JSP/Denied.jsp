@@ -8,7 +8,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/Resources/Images/favicon.png" />">
 </head>
 <body>
-	You Are Identified As: <strong>${user}</strong>
+	You Are Identified As: <strong>${Username}</strong>
         </br>
         You are not authorized to access this page.
 	<a href="<c:url value="/Logout" />">Logout</a>

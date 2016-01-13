@@ -1,7 +1,8 @@
 package com.Bullseye.Config;
 
+import com.Bullseye.Models.Roles;
 import com.Bullseye.Models.Service.UserService;
-import com.Bullseye.Models.User;
+import com.Bullseye.Models.Users;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String argUsername) throws UsernameNotFoundException
     {
-        User user = userService.getUserByUsername(argUsername);
+        Users user = userService.getUserByUsername(argUsername);
         if(user == null)
         {
             throw new UsernameNotFoundException("Username not found");
@@ -34,10 +35,16 @@ public class CustomUserDetailsService implements UserDetailsService
     /*
         Returns A List Of Roles
     */
-    private List<GrantedAuthority> getGrantedAuthorities(User user)
+    private List<GrantedAuthority> getGrantedAuthorities(Users user)
     {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        
+        for(Roles Role : user.getUser_Roles())
+        {
+            System.out.println("Adding Role: " + Role.getName());
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + Role.getName()));
+        }
+        
         return authorities;
     }
 }

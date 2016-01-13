@@ -9,9 +9,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/Resources/Images/favicon.png" />">
     </head>
     <body>
-        <h1>Hello <strong>${user}</strong></h1>
-        <a href="<c:url value="/Install"/>">Install</a>
-        <br/>
+        <h1>Hello <strong>${Username}</strong></h1>
         <a href="<c:url value="/Dashboard"/>">Dashboard</a>
         <br/>
         <a href="<c:url value="/Denied"/>">Denied</a>
@@ -22,6 +20,5 @@
         <br/>
         <a href="<c:url value="/Logout"/>">Logout</a>
         <br/>
-        <strong>${RoleList}</strong>
     </body>
 </html>
