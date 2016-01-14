@@ -20,6 +20,8 @@ public class UserRegistrationDTO
     @Size(min = 6, max = 32, message = "Password must be between 6 and 32 characters")
     private String Password;
     
+    private String Captcha;
+    
     private boolean Enabled                 = true;
     private boolean accountNonExpired       = true;
     private boolean credentialsNonExpired   = true;
@@ -105,5 +107,13 @@ public class UserRegistrationDTO
     
     public void addRole(Roles argRole) {
         this.User_Roles.add(argRole);
+    }
+
+    public String getCaptcha() {
+        return Captcha;
+    }
+
+    public void setCaptcha(String Captcha) {
+        this.Captcha = Captcha;
     }
 }

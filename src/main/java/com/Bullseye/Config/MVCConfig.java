@@ -75,9 +75,9 @@ public class MVCConfig extends WebMvcConfigurerAdapter
     {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver"); // CONFIG
-        ds.setUrl("jdbc:mysql://localhost:3306/TestingBullseye"); // CONFIG
-        ds.setUsername("root"); // CONFIG
-        ds.setPassword(""); // COFNIG
+        ds.setUrl("jdbc:mysql://localhost:3306/Bullseye"); // CONFIG
+        ds.setUsername("testuser"); // CONFIG
+        ds.setPassword("password"); // COFNIG
 
         return ds;
     }

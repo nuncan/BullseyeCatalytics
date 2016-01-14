@@ -49,7 +49,7 @@
                         <div class="col-md-12">
                             <input type="password" name="password" class="form-control" placeholder="Password" required/>
                         </div>
-                    </div>
+                    </div>   
                     <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                     <div class="form-group">
                         <div class="col-md-6">

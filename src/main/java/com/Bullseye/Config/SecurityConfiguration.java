@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
         http
             .authorizeRequests()
                 // Allow Access To Landing Page & Resources
-		.antMatchers("/", "/Index", "/Resources/**", "/Register/**").permitAll()
+		.antMatchers("/", "/Resources/**").permitAll()
 	  	.antMatchers("/Dashboard/**").access("hasRole('CLIENT') or hasRole('ADMIN')")
 	  	.and()
             // Setup Login Page
@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	  	.and()
             // Setup 'Remember Me' Option
             .rememberMe()
-                .tokenValiditySeconds(604800) // 604800 Seconds = 1 Week
+                .tokenValiditySeconds(604800) // 604800 Seconds = 1 Week (Causing Issues With Sign Out Button)
                 .and()
             // Setup Logout Page
             .logout()

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("UserRegistration")
-public class UserRegistrationImpl implements UserRegistrationService
+public class UserRegistrationImpl implements UserRegistrationService 
 {
     @Autowired
     UserService hUserService;

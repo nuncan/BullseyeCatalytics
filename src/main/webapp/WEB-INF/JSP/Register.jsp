@@ -54,6 +54,14 @@
                                 <input type="password" class="form-control" name="Re-Password" id="Password2" placeholder="Re-enter Your Password" required/>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <img src="<c:url value='/captcha.jpg' />" />
+                            </div>
+                            <div class="col-md-5 pull-right">
+                                <input type="text" class="form-control" name="Captcha" placeholder="Captcha" required/>
+                            </div>
+                        </div>
                         <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                         <div class="form-group">
                             <div class="col-md-offset-6 col-md-6">

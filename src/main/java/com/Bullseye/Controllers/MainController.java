@@ -2,15 +2,15 @@ package com.Bullseye.Controllers;
 
 import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Controllers.Services.UserRegistrationService;
-import com.Bullseye.Models.Service.RolesService;
 import javax.validation.Valid;
-import com.Bullseye.Models.Users;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.Bullseye.Models.Service.UserService;
+import com.google.code.kaptcha.servlet.KaptchaExtend;
+import java.io.IOException;
 import java.util.Collection;
-import ma.glasnost.orika.MapperFacade;
+import javax.servlet.ServletException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
-public class MainController
+public class MainController extends KaptchaExtend
 {   
     @Autowired
     UserService hUserService;
@@ -35,11 +35,19 @@ public class MainController
     //
     //  Index Page
     //
-    @RequestMapping(value = { "/", "/Index" }, method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Index_GET(ModelMap model)
     {
-        model.addAttribute("Username", getUsername());
-        return "Index";
+        return "Login";
+    }
+    
+    //
+    //  Add Captcha Support
+    //
+    @RequestMapping(value = "/captcha.jpg", method = RequestMethod.GET)
+    public void captcha(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        super.captcha(req, resp);
     }
     
     //
@@ -48,7 +56,6 @@ public class MainController
     @RequestMapping(value = { "/Dashboard" }, method = RequestMethod.GET)
     public String Dashboard_GET(ModelMap model)
     {
-        
         model.addAttribute("Roles", getUserRoles());
         model.addAttribute("Username", getUsername());
         return "Dashboard";
@@ -85,21 +92,24 @@ public class MainController
     //  Users Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
-    public String Register_POST(@Valid UserRegistrationDTO UserRegistartionData, BindingResult hBindResult)
+    public String Register_POST(@Valid UserRegistrationDTO UserRegistrationData, BindingResult hBindResult, HttpServletRequest req)
     {
         // Check If Users Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
             return "redirect:/Register?Error";
         }
         
-        // This Will Catch Edge Cases Such As Role Doesnt Exist Or User Already Exists
-        if(this.hUserReg.RegisterUser(UserRegistartionData) == false)
+        // First Check The Captcha, The Create The Account
+        if(UserRegistrationData.getCaptcha().equals(getGeneratedKey(req)))
         {
-            return "redirect:/Register?Error";
+            // Seconds Try To Create New User
+            if(this.hUserReg.RegisterUser(UserRegistrationData))
+            {
+                return "redirect:/Login";
+            }
         }
-        
-        // Redirect Client Back To Their Page (Notice: You HAVE To Redirect, A Forward Will Also Do A POST)
-        return "redirect:/Login";
+
+        return "redirect:/Register?Error";
     }
 
     //
