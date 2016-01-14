@@ -1,6 +1,7 @@
 package com.Bullseye.Controllers;
 
-import com.Bullseye.Models.DTO.UserRegistrationDTO;
+import com.Bullseye.Controllers.Models.UserRegistrationDTO;
+import com.Bullseye.Controllers.Services.UserRegistrationService;
 import com.Bullseye.Models.Service.RolesService;
 import javax.validation.Valid;
 import com.Bullseye.Models.Users;
@@ -8,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.Bullseye.Models.Service.UserService;
+import java.util.Collection;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
@@ -27,10 +30,7 @@ public class MainController
     UserService hUserService;
     
     @Autowired
-    RolesService hRolesService;
-    
-    @Autowired
-    MapperFacade autoMapper;
+    UserRegistrationService hUserReg;
     
     //
     //  Index Page
@@ -48,6 +48,8 @@ public class MainController
     @RequestMapping(value = { "/Dashboard" }, method = RequestMethod.GET)
     public String Dashboard_GET(ModelMap model)
     {
+        
+        model.addAttribute("Roles", getUserRoles());
         model.addAttribute("Username", getUsername());
         return "Dashboard";
     }
@@ -87,14 +89,14 @@ public class MainController
     {
         // Check If Users Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
-            return "forward:/Register?Error";
+            return "redirect:/Register?Error";
         }
-       
-        // Automap Properties To A New Users Object
-        Users hUser = autoMapper.map(UserRegistartionData, Users.class);
-
-        // Finally, We Save The New Users Entity
-        this.hUserService.addByEntity(hUser);
+        
+        // This Will Catch Edge Cases Such As Role Doesnt Exist Or User Already Exists
+        if(this.hUserReg.RegisterUser(UserRegistartionData) == false)
+        {
+            return "redirect:/Register?Error";
+        }
         
         // Redirect Client Back To Their Page (Notice: You HAVE To Redirect, A Forward Will Also Do A POST)
         return "redirect:/Login";
@@ -123,7 +125,8 @@ public class MainController
     public String Logout_GET (HttpServletRequest request, HttpServletResponse response)
     {
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	if (auth != null){    
+	if (auth != null){
+            auth.setAuthenticated(false);
             new SecurityContextLogoutHandler().logout(request, response, auth);
 	}
 	return "redirect:/Login?LoggedOut";
@@ -146,5 +149,24 @@ public class MainController
             userName = principal.toString();
 	}
 	return userName;
+    }
+    
+    
+    private String getUserRoles()
+    {
+        String userRoles;
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // User Is Logged In
+	if (principal instanceof UserDetails)
+        {
+            Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+            userRoles = authorities.toString().replaceAll("ROLE_", "");
+	}
+        else
+        {
+            userRoles = principal.toString();
+	}
+	return userRoles;
     }
 }

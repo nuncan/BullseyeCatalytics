@@ -42,12 +42,12 @@
                     </c:if>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="text" name='username' class="form-control" placeholder="Username" required/>
+                            <input type="text" name="username" class="form-control" placeholder="Username" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="password" name='password' class="form-control" placeholder="Password" required/>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required/>
                         </div>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />

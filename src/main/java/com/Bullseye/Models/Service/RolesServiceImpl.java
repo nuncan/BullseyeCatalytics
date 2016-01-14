@@ -6,6 +6,7 @@ import com.Bullseye.Models.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("rolesService")
 public class RolesServiceImpl extends GenericServiceImpl<Roles, Integer> implements RolesService
@@ -22,6 +23,12 @@ public class RolesServiceImpl extends GenericServiceImpl<Roles, Integer> impleme
     {
         super(genericDAO);
         this.rolesDAO = (RolesDAO)genericDAO;
+    }
+
+    @Override
+    @Transactional
+    public Roles getRoleByName(String argRoleName) {
+        return(this.rolesDAO.getRoleByName(argRoleName));
     }
     
 }

@@ -31,31 +31,27 @@
                     <form id="Registration_Form" name="Registration_Form" action="${registrationUrl}" method='post' class="form-horizontal">
                         <c:if test="${param.Error != null}">
                             <div class="alert alert-danger">
-                                <p>An Error Occured, Please Try Again.</p>
+                                <p>An Error Occurred, Please Try Again.</p>
                             </div>
                         </c:if>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Username:</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="Username"/>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="Username" placeholder="Username" required/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Email:</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="Email"/>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="Email" placeholder="Email" required/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Password:</label>
-                            <div class="col-md-9">
-                                <input type="password" class="form-control" name="Password" id="Password1"/>
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" name="Password" id="Password1" placeholder="Password" required/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Confirm Password:</label>
-                            <div class="col-md-9">
-                                <input type="password" class="form-control" name="Re-Password" id="Password2"/>
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" name="Re-Password" id="Password2" placeholder="Re-enter Your Password" required/>
                             </div>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
@@ -69,6 +65,9 @@
                 <div class="login-footer">
                     <div class="pull-left">
                         &copy; 2015 Bullseye.com
+                    </div>
+                    <div class="pull-right">
+                        <a href="<c:url value="/Login"/>">Login</a>
                     </div>
                 </div>
             </div>

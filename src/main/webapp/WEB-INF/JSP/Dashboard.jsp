@@ -47,7 +47,7 @@
                             </div>
                             <div class="profile-data">
                                 <div class="profile-data-name">${Username}</div>
-                                <div class="profile-data-title">Beta Tester</div>
+                                <div class="profile-data-title">${Roles}</div>
                             </div>
                             <div class="profile-controls">
                                 <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>

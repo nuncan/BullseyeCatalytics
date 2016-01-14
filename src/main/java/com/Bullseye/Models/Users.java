@@ -121,4 +121,8 @@ public class Users implements Serializable
     public void setUser_Roles(Set<Roles> User_Roles) {
         this.User_Roles = User_Roles;
     }
+    
+    public void addRole(Roles argRole) {
+        this.User_Roles.add(argRole);
+    }
 }

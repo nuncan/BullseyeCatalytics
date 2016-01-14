@@ -1,4 +1,4 @@
-package com.Bullseye.Models.DTO;
+package com.Bullseye.Controllers.Models;
 
 import com.Bullseye.Models.Roles;
 import java.util.HashSet;
@@ -11,21 +11,20 @@ public class UserRegistrationDTO
 {
     private int ID;
     
-    @Size(min = 2, max = 32, message = "Username must be between 4 and 32 characters")
+    @Size(min = 4, max = 32, message = "Username must be between 4 and 32 characters")
     private String Username;
     
     @Email(message = "Must be an Email")
-    @Size(min = 6, max = 32, message = "Email must be between 6 and 32 characters")
     private String Email;
     
-    @Size(min = 2, max = 32, message = "Password must be between 6 and 32 characters")
+    @Size(min = 6, max = 32, message = "Password must be between 6 and 32 characters")
     private String Password;
     
-    private boolean Enabled = true;
-    private boolean accountNonExpired = true;
-    private boolean credentialsNonExpired = true;
-    private boolean accountNonLocked = true;
-    private Set<Roles> User_Roles = new HashSet<Roles>();
+    private boolean Enabled                 = true;
+    private boolean accountNonExpired       = true;
+    private boolean credentialsNonExpired   = true;
+    private boolean accountNonLocked        = true;
+    private Set<Roles> User_Roles           = new HashSet<Roles>();
     
     public UserRegistrationDTO()
     {
@@ -102,5 +101,9 @@ public class UserRegistrationDTO
 
     public void setUser_Roles(Set<Roles> User_Roles) {
         this.User_Roles = User_Roles;
+    }
+    
+    public void addRole(Roles argRole) {
+        this.User_Roles.add(argRole);
     }
 }

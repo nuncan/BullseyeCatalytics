@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService
     }
  
     /*
-        Returns A List Of Roles
+        Returns A List Of Roles Assigned To The User
     */
     private List<GrantedAuthority> getGrantedAuthorities(Users user)
     {

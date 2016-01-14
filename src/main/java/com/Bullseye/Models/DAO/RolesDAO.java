@@ -4,5 +4,5 @@ import com.Bullseye.Models.Roles;
 
 public interface RolesDAO extends GenericDAO<Roles, Integer>
 {
-    
+    public Roles getRoleByName(String argRoleName);
 }
