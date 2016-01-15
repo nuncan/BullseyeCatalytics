@@ -6,7 +6,6 @@ import javax.validation.Valid;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.Bullseye.Models.Service.UserService;
 import com.Bullseye.Services.KaptchaService;
 import java.util.Collection;
 import org.springframework.stereotype.Controller;
@@ -23,10 +22,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 
 @Controller
 public class MainController
-{   
-    @Autowired
-    UserService hUserService;
-    
+{
     @Autowired
     UserRegistrationService hUserReg;
     
@@ -64,7 +60,7 @@ public class MainController
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken))
         {
-            return "forward:/Dashboard";
+            return "redirect:/Dashboard";
         }
         
         return "Register";
@@ -106,7 +102,7 @@ public class MainController
         // Check If The Users Is Already Logged In
         if (!(auth instanceof AnonymousAuthenticationToken))
         {
-            return "forward:/Dashboard";
+            return "redirect:/Dashboard";
         }
         return "Login";
     }
