@@ -2,6 +2,7 @@ package com.Bullseye.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,10 +18,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     @Qualifier("customUserDetailsService")
     UserDetailsService userDetailsService;
     
+    @Bean
+    public CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter() throws Exception
+    {
+        CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter = new CustomUsernamePasswordAuthenticationFilter();
+        customUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
+        return customUsernamePasswordAuthenticationFilter;
+    }
+    
+    //
+    //  Configuring Spring Security With Our User Model
+    //
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception
+    {
+        auth.userDetailsService(userDetailsService);
+    }
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {  
         http
+            // Used To Impose Captcha Check On Login
+            .addFilter(customUsernamePasswordAuthenticationFilter())
             .authorizeRequests()
                 // Allow Access To Landing Page & Resources
 		.antMatchers("/", "/Resources/**").permitAll()
@@ -30,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             .formLogin()
                 .loginPage("/Login").permitAll()
                 .failureUrl("/Login?Error").permitAll()
-                .defaultSuccessUrl("/Dashboard")
+                .defaultSuccessUrl("/Dashboard", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
 	  	.and()
@@ -40,6 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .and()
             // Setup Logout Page
             .logout()
+                .invalidateHttpSession(true)
                 .logoutUrl("/Logout").permitAll()
                 .logoutSuccessUrl("/Login?LoggedOut")
                 .and()
@@ -49,20 +70,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             .exceptionHandling()
             .accessDeniedPage("/Denied");
     }
-    
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception
-    {
-        auth.userDetailsService(userDetailsService);
-    }
-    
-    
-/*    
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception
-    {
-	auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN", "CLIENT");
-	auth.inMemoryAuthentication().withUser("demo").password("123456").roles("CLIENT");
-    }
-*/    
 }

@@ -7,10 +7,8 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.Bullseye.Models.Service.UserService;
-import com.google.code.kaptcha.servlet.KaptchaExtend;
-import java.io.IOException;
+import com.Bullseye.Services.KaptchaService;
 import java.util.Collection;
-import javax.servlet.ServletException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.security.core.Authentication;
@@ -24,7 +22,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Controller
-public class MainController extends KaptchaExtend
+public class MainController
 {   
     @Autowired
     UserService hUserService;
@@ -32,23 +30,8 @@ public class MainController extends KaptchaExtend
     @Autowired
     UserRegistrationService hUserReg;
     
-    //
-    //  Index Page
-    //
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String Index_GET(ModelMap model)
-    {
-        return "Login";
-    }
-    
-    //
-    //  Add Captcha Support
-    //
-    @RequestMapping(value = "/captcha.jpg", method = RequestMethod.GET)
-    public void captcha(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
-        super.captcha(req, resp);
-    }
+    @Autowired
+    KaptchaService hKaptcha;
     
     //
     //  Dashboard Page
@@ -100,7 +83,7 @@ public class MainController extends KaptchaExtend
         }
         
         // First Check The Captcha, The Create The Account
-        if(UserRegistrationData.getCaptcha().equals(getGeneratedKey(req)))
+        if(UserRegistrationData.getCaptcha().equals(hKaptcha.getGeneratedKey(req)))
         {
             // Seconds Try To Create New User
             if(this.hUserReg.RegisterUser(UserRegistrationData))
@@ -115,7 +98,7 @@ public class MainController extends KaptchaExtend
     //
     //  Login Page
     //
-    @RequestMapping(value = "/Login", method = RequestMethod.GET)
+    @RequestMapping(value = { "/Login", "/" }, method = RequestMethod.GET)
     public String Login_GET()
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -135,8 +118,7 @@ public class MainController extends KaptchaExtend
     public String Logout_GET (HttpServletRequest request, HttpServletResponse response)
     {
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	if (auth != null){
-            auth.setAuthenticated(false);
+	if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
 	}
 	return "redirect:/Login?LoggedOut";
