@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.Email;
 
 public class UserRegistrationDTO
 {
-    private int ID;
-    
     @Size(min = 4, max = 32, message = "Username must be between 4 and 32 characters")
     private String Username;
     
@@ -31,14 +29,6 @@ public class UserRegistrationDTO
     public UserRegistrationDTO()
     {
         
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getUsername() {

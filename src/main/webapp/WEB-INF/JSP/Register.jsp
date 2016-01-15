@@ -72,7 +72,7 @@
                 </div>
                 <div class="login-footer">
                     <div class="pull-left">
-                        &copy; 2015 Bullseye.com
+                        &copy; 2016 Catalytics.com
                     </div>
                     <div class="pull-right">
                         <a href="<c:url value="/Login"/>">Login</a>
