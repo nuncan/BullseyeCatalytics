@@ -4,11 +4,13 @@ import java.util.Properties;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -63,7 +65,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter
         Properties prop = new Properties();
         prop.put("hibernate.format_sql", "true");
         prop.put("hibernate.show_sql", "true");
-        prop.put("hibernate.hbm2ddl.auto", "validate");
+        prop.put("hibernate.hbm2ddl.auto", "verify"); // CONFIG
         prop.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect"); // CONFIG
 
         return prop;
@@ -90,5 +92,14 @@ public class MVCConfig extends WebMvcConfigurerAdapter
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(s);
         return txManager;
+    }
+    
+    // Used For JSR303 Constraints {@Valid..etc}.. Drops Messages To The Front
+    @Bean
+    public MessageSource messageSource()
+    {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        return messageSource;
     }
 }

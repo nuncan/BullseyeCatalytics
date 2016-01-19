@@ -4,6 +4,7 @@ import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Models.Service.RolesService;
 import com.Bullseye.Models.Service.UserService;
 import com.Bullseye.Models.Users;
+import javax.servlet.http.HttpServletRequest;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +32,7 @@ public class UserRegistrationImpl implements UserRegistrationService
     */
     @Override
     @Transactional
-    public boolean RegisterUser(UserRegistrationDTO hData)
+    public boolean RegisterUser(UserRegistrationDTO hData, HttpServletRequest hRequest)
     {
         // Automap The Properties Into A New User Entity
         Users hUser = autoMapper.map(hData, Users.class);
@@ -41,6 +42,9 @@ public class UserRegistrationImpl implements UserRegistrationService
 //            throw new RuntimeException("Couldnt Get A Pointer To The Client Role In The Database!");
             return(false);
         }
+        
+        // Assign IP Address
+        hUser.setCreatorIP(hRequest.getRemoteAddr());
         
         // Encode The Users Password With BCrypt
         hUser.setPassword(this.getBCryptPasswordEncoder.encode(hUser.getPassword()));

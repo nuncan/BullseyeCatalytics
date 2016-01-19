@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- META SECTION     -->
+        <title>Setup Instructions</title>
+        <!-- END META SECTION -->
+
+        <!-- CSS INCLUDE     -->
+        <link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"/>
+        <!-- EOF CSS INCLUDE -->
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Setup Instructions</h1>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>Required Tools:</li>
+                            <ul>
+                                <li><a href="http://www.wampserver.com/en/">WAMP</a></li>
+                                <li><a href="https://netbeans.org/">Netbeans</a></li>
+                            </ul>
+                        </li>
+                        <li>Procedure:</li>
+                            <ul>
+                                <li>First, Install WAMP And Start WAMP Manager</li>
+                                <li>Navigate To <a href="http://localhost/phpmyadmin">PHPMyAdmin</a></li>
+                                <li>Create A Database Called 'Catalytics'</li>
+                            </ul>
+                        <li>Configuration:</li>
+                            <ul>
+                                <li>Open The Project In Netbeans And Navigate To '<b>MVCConfig.java</b>'</li>
+                                <li>Locate This Line '<b>prop.put("hibernate.hbm2ddl.auto", "validate");</b>'</a>
+                                <li>Change It To: '<b>prop.put("hibernate.hbm2ddl.auto", "create");</b>'</li>
+                                <li>This Tells Hibernate To Create Your Database For You. After The First Run, You Will Want To Change This Back To 'validate'</li>
+                                <li>Setup Is Almost Complete! Run The Application For The First Time</li>
+                                <li>Once Application Has Spawned, Navigate Back To <a href="http://localhost/phpmyadmin">PHPMyAdmin</a> And Click The Table '<b>Roles</b>'</li>
+                                <li>Now Click The '<b>Insert</b> Tab And Insert A New Role Named: "<b>CLIENT</b>", Then Repeat This Process And Create A New Role Named "<b>ADMIN</b>"</li>
+                                <li>Now Go Register A New Account</li>
+                                <li>Once Account Is Created Go Back To <a href="http://localhost/phpmyadmin">PHPMyAdmin</a> And Click The Table '<b>Users_Roles</b>'</li>
+                                <li>Now Click The '<b>Insert</b> Tab And Link Your User Account (1) To Roles 1 And 2 (Effectively Giving You Both 'CLIENT' & 'ADMIN' Roles</li>
+                                <li>Setup Is All Complete! Make Sure To Change Hibernate's 'Create' Back To 'Validate'</li>
+                            </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- JAVASCRIPT INCLUDE     -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <!-- EOF JAVASCRIPT INCLUDE -->
+    </body>
+</html>

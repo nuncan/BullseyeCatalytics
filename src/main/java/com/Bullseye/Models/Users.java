@@ -30,6 +30,10 @@ public class Users implements Serializable
     @Column(name = "User_Password", nullable = false)
     private String Password;
     
+    @Column(name = "User_Creator_IP", nullable = false)
+    private String CreatorIP;
+    
+//  Spring Security Attributes    
     @Column(name = "User_Enabled", nullable = false)
     private boolean Enabled;
     
@@ -41,6 +45,7 @@ public class Users implements Serializable
     
     @Column(name = "User_accountNonLocked", nullable = false)
     private boolean accountNonLocked;
+//  End Of Spring Security Attributes
     
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Roles> User_Roles = new HashSet<Roles>();
@@ -124,5 +129,13 @@ public class Users implements Serializable
     
     public void addRole(Roles argRole) {
         this.User_Roles.add(argRole);
+    }
+
+    public String getCreatorIP() {
+        return CreatorIP;
+    }
+
+    public void setCreatorIP(String CreatorIP) {
+        this.CreatorIP = CreatorIP;
     }
 }

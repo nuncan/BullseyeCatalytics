@@ -47,8 +47,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             .addFilter(customUsernamePasswordAuthenticationFilter())
             .authorizeRequests()
                 // Allow Access To Landing Page & Resources
-		.antMatchers("/", "/Resources/**").permitAll()
+		.antMatchers("/", "/Register", "/Resources/**").permitAll()
 	  	.antMatchers("/Dashboard/**").access("hasRole('CLIENT') or hasRole('ADMIN')")
+                .antMatchers("/Dashboard/Admin/**").access("hasRole('ADMIN')")
 	  	.and()
             // Setup Login Page
             .formLogin()

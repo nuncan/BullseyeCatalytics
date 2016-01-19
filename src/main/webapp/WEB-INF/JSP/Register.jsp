@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-7">
-                                <img class="img-responsive" src="<c:url value='/Captcha.jpg' />" />
+                                <img class="img-responsive" src="<c:url value='/Captcha.jpg' />" width="100%"/>
                             </div>
                             <div class="col-md-5">
                                 <input type="text" class="form-control" name="Captcha" placeholder="Captcha" required/>

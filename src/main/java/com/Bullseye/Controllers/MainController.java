@@ -2,6 +2,8 @@ package com.Bullseye.Controllers;
 
 import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Controllers.Services.UserRegistrationService;
+import com.Bullseye.Models.Service.RolesService;
+import com.Bullseye.Models.Service.UserService;
 import javax.validation.Valid;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,12 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 @Controller
 public class MainController
 {
+    @Autowired
+    UserService hUserService;
+    
+    @Autowired
+    RolesService hRolesService;
+    
     @Autowired
     UserRegistrationService hUserReg;
     
@@ -71,24 +79,75 @@ public class MainController
     //  Users Object Then Perists That Object Into The Database
     //
     @RequestMapping(value = "/Register" , method = RequestMethod.POST)
-    public String Register_POST(@Valid UserRegistrationDTO UserRegistrationData, BindingResult hBindResult, HttpServletRequest req)
+    public String Register_POST(@Valid UserRegistrationDTO UserRegistrationData, BindingResult hBindResult, HttpServletRequest hRequest)
     {
         // Check If Users Submitted Bad Data, If So, Redirect And Try Again
         if(hBindResult.hasErrors()) {
             return "redirect:/Register?Error";
         }
         
-        // First Check The Captcha, The Create The Account
-        if(UserRegistrationData.getCaptcha().equals(hKaptcha.getGeneratedKey(req)))
+        // First: Check The Captcha, Then Proceed To Create The Account
+        if(UserRegistrationData.getCaptcha().equals(hKaptcha.getGeneratedKey(hRequest)))
         {
-            // Seconds Try To Create New User
-            if(this.hUserReg.RegisterUser(UserRegistrationData))
+            // Second: Try To Create New User
+            if(this.hUserReg.RegisterUser(UserRegistrationData, hRequest))
             {
                 return "redirect:/Login";
             }
         }
 
         return "redirect:/Register?Error";
+    }
+    
+    //
+    //  Admin User Management Page
+    //
+    @RequestMapping(value = "/Dashboard/Admin/Users", method = RequestMethod.GET)
+    public String Admin_Users_GET(ModelMap model)
+    {
+        // Add User Roles List
+        model.addAttribute("Roles", getUserRoles());
+        
+        // Add Username
+        model.addAttribute("Username", getUsername());
+        
+        // Add List Of Users
+        model.addAttribute("UserList", this.hUserService.listAll());
+        
+        return "/Admin/Users";
+    }
+    
+    //
+    //  Admin Role Management Page
+    //
+    @RequestMapping(value = "/Dashboard/Admin/Roles", method = RequestMethod.GET)
+    public String Admin_Roles_GET(ModelMap model)
+    {
+        // Add User Roles List
+        model.addAttribute("Roles", getUserRoles());
+        
+        // Add Username
+        model.addAttribute("Username", getUsername());
+        
+        // Add List Of Users
+        model.addAttribute("RoleList", this.hRolesService.listAll());
+        
+        return "/Admin/Roles";
+    }
+    
+    //
+    //  Admin Global Management Page
+    //
+    @RequestMapping(value = "/Dashboard/Admin/Global", method = RequestMethod.GET)
+    public String Admin_Global_Settings_GET(ModelMap model)
+    {
+        // Add User Roles List
+        model.addAttribute("Roles", getUserRoles());
+        
+        // Add Username
+        model.addAttribute("Username", getUsername());
+
+        return "/Admin/Global";
     }
 
     //
