@@ -4,6 +4,8 @@ import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Models.Service.RolesService;
 import com.Bullseye.Models.Service.UserService;
 import com.Bullseye.Models.Users;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("UserRegistration")
-public class UserRegistrationImpl implements UserRegistrationService 
+public class MainControllerImpl implements MainControllerService 
 {
     @Autowired
     UserService hUserService;

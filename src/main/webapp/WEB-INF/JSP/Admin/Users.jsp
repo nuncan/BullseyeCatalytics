@@ -110,14 +110,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-
+                                                    <th>Username</th>
                                                 </tr>
                                             </thead>
                                             <c:forEach items="${UserList}" var="Users">
                                                 <tbody>
                                                     <tr>
                                                         <td>${Users.ID}</td>
-
+                                                        <td>${Users.Username}</td>
                                                     </tr>
                                                 </tbody>
                                             </c:forEach>

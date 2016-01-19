@@ -1,9 +1,7 @@
 package com.Bullseye.Controllers;
 
 import com.Bullseye.Controllers.Models.UserRegistrationDTO;
-import com.Bullseye.Controllers.Services.UserRegistrationService;
-import com.Bullseye.Models.Service.RolesService;
-import com.Bullseye.Models.Service.UserService;
+import com.Bullseye.Controllers.Services.MainControllerService;
 import javax.validation.Valid;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +22,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 
 @Controller
 public class MainController
-{
+{   
     @Autowired
-    UserService hUserService;
-    
-    @Autowired
-    RolesService hRolesService;
-    
-    @Autowired
-    UserRegistrationService hUserReg;
+    MainControllerService hMainControllerService;
     
     @Autowired
     KaptchaService hKaptcha;
@@ -90,7 +82,7 @@ public class MainController
         if(UserRegistrationData.getCaptcha().equals(hKaptcha.getGeneratedKey(hRequest)))
         {
             // Second: Try To Create New User
-            if(this.hUserReg.RegisterUser(UserRegistrationData, hRequest))
+            if(this.hMainControllerService.RegisterUser(UserRegistrationData, hRequest))
             {
                 return "redirect:/Login";
             }
@@ -112,7 +104,7 @@ public class MainController
         model.addAttribute("Username", getUsername());
         
         // Add List Of Users
-        model.addAttribute("UserList", this.hUserService.listAll());
+//        model.addAttribute("UserList", this.hMainControllerService.getUsersList());
         
         return "/Admin/Users";
     }
@@ -130,7 +122,7 @@ public class MainController
         model.addAttribute("Username", getUsername());
         
         // Add List Of Users
-        model.addAttribute("RoleList", this.hRolesService.listAll());
+//      model.addAttribute("RoleList", this.hMainControllerService.listAll());
         
         return "/Admin/Roles";
     }

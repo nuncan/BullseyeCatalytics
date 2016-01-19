@@ -20,6 +20,6 @@ public class OrikaConfig implements FactoryBean<MapperFacade>
  
     @Override
     public boolean isSingleton() {
-        return true;
+        return false;
     }
 }
