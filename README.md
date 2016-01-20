@@ -1,3 +1,7 @@
+Goal:
+  A Simple Webapp Where Users Can Sign Up, And An Admin Can Manage Them.
+  All Written With A Strong Emphasis On Security & Scalability.
+
 Includes:
 
 - Spring
@@ -11,11 +15,6 @@ Includes:
 - CSRF Tokens
 - BCrypt Password Encoding (Integrated Into Spring Security)
 - User Roles
-
-Front End:
-- jVector Maps
-- Bootstrapped Responsive Theme
-- Custom Iconsheet Is Base64 Encoded/Embedded Into .css
 
 PS:
 - 100% Configured With Annotations
