@@ -2,6 +2,8 @@ package com.Bullseye.Controllers;
 
 import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Controllers.Services.MainControllerService;
+import com.Bullseye.Models.Service.RolesService;
+import com.Bullseye.Models.Service.UserService;
 import javax.validation.Valid;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,12 @@ public class MainController
 {   
     @Autowired
     MainControllerService hMainControllerService;
+    
+    @Autowired
+    UserService hUserService;
+    
+    @Autowired
+    RolesService hRoleService;
     
     @Autowired
     KaptchaService hKaptcha;
@@ -94,6 +102,7 @@ public class MainController
     //
     //  Admin User Management Page
     //
+    
     @RequestMapping(value = "/Dashboard/Admin/Users", method = RequestMethod.GET)
     public String Admin_Users_GET(ModelMap model)
     {
@@ -104,7 +113,7 @@ public class MainController
         model.addAttribute("Username", getUsername());
         
         // Add List Of Users
-//        model.addAttribute("UserList", this.hMainControllerService.getUsersList());
+        model.addAttribute("UserList", this.hUserService.listAll());
         
         return "/Admin/Users";
     }
@@ -122,7 +131,7 @@ public class MainController
         model.addAttribute("Username", getUsername());
         
         // Add List Of Users
-//      model.addAttribute("RoleList", this.hMainControllerService.listAll());
+        model.addAttribute("RoleList", this.hRoleService.listAll());
         
         return "/Admin/Roles";
     }
@@ -179,6 +188,7 @@ public class MainController
 	String userName;
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        // User Is Logged In
 	if (principal instanceof UserDetails)
         {
             userName = ((UserDetails)principal).getUsername();
@@ -190,7 +200,9 @@ public class MainController
 	return userName;
     }
     
-    
+    //
+    //  Return User Roles
+    //
     private String getUserRoles()
     {
         String userRoles;

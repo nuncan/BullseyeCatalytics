@@ -4,8 +4,8 @@ import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Models.Service.RolesService;
 import com.Bullseye.Models.Service.UserService;
 import com.Bullseye.Models.Users;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +30,19 @@ public class MainControllerImpl implements MainControllerService
     
     /*
         This Method Is Responsible For Registering New Users Into The System
-    
     */
     @Override
     @Transactional
     public boolean RegisterUser(UserRegistrationDTO hData, HttpServletRequest hRequest)
     {
-        // Automap The Properties Into A New User Entity
+        // Automap The Properties Into A New User Entity (Not Sure This Is The Best Way To Be Doing This...)
         Users hUser = autoMapper.map(hData, Users.class);
         
         // Try To Lookup The Client Role In The Database
         if(this.hRolesService.getRoleByName("CLIENT") == null) {
-//            throw new RuntimeException("Couldnt Get A Pointer To The Client Role In The Database!");
+        // Maybe Take This Opportunity To Create This ROLE In The Database
+            
+        // throw new RuntimeException("Couldnt Get A Pointer To The Client Role In The Database!");
             return(false);
         }
         

@@ -65,7 +65,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter
         Properties prop = new Properties();
         prop.put("hibernate.format_sql", "true");
         prop.put("hibernate.show_sql", "true");
-        prop.put("hibernate.hbm2ddl.auto", "verify"); // CONFIG
+        prop.put("hibernate.hbm2ddl.auto", "validate"); // CONFIG
         prop.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect"); // CONFIG
 
         return prop;

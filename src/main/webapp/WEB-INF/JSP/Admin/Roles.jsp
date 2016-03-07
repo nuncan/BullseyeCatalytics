@@ -110,14 +110,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-
+                                                    <th>Name</th>
                                                 </tr>
                                             </thead>
-                                            <c:forEach items="${RoleList}" var="Roles">
+                                            <c:forEach items="${RoleList}" var="Role">
                                                 <tbody>
                                                     <tr>
-                                                        <td>${Roles.ID}</td>
-
+                                                        <td>${Role.ID}</td>
+                                                        <td>${Role.getName()}</td>
                                                     </tr>
                                                 </tbody>
                                             </c:forEach>

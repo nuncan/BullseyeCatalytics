@@ -1,9 +1,7 @@
 package com.Bullseye.Controllers.Services;
 
-import com.Bullseye.Controllers.Models.UserRegistrationDTO;
-import com.Bullseye.Models.Users;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 
 public interface MainControllerService
 {

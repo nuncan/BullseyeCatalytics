@@ -95,6 +95,7 @@
                 <div class="page-content-wrap">
                     <div class="row">
                         <div class="col-md-12">
+                            <!-- Injecting Our User List Here -->
                             <c:if test="${!empty UserList}">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -111,13 +112,25 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Username</th>
+                                                    <th>Email</th>
+                                                    <th>Password</th>
+                                                    <th>Enabled?</th>
+                                                    <th>Account Valid?</th>
+                                                    <th>Password Valid?</th>
+                                                    <th>Account Unlocked?</th>
                                                 </tr>
                                             </thead>
-                                            <c:forEach items="${UserList}" var="Users">
+                                            <c:forEach items="${UserList}" var="User">
                                                 <tbody>
                                                     <tr>
-                                                        <td>${Users.ID}</td>
-                                                        <td>${Users.Username}</td>
+                                                        <td>${User.ID}</td>
+                                                        <td>${User.getUsername()}</td>
+                                                        <td>${User.getEmail()}</td>
+                                                        <td>${User.getPassword()}</td>
+                                                        <td>${User.isEnabled()}</td>
+                                                        <td>${User.isAccountNonExpired()}</td>
+                                                        <td>${User.isCredentialsNonExpired()}</td>
+                                                        <td>${User.isAccountNonLocked()}</td>                                                       
                                                     </tr>
                                                 </tbody>
                                             </c:forEach>
