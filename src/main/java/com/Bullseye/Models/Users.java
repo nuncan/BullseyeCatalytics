@@ -17,7 +17,6 @@ public class Users implements Serializable
 {
     @Id
     @GeneratedValue
-    
     @Column(name = "User_ID", nullable = false, unique = true)
     private int ID;
     
