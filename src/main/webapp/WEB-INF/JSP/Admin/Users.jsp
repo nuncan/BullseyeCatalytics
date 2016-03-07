@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://github.com/tduchateau/DataTables-taglib" prefix="datatables" %>
 <%@ page session="true" %>
 
 <!DOCTYPE html>
@@ -11,6 +12,13 @@
         <title>Users</title>
         <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/Resources/Images/favicon.png" />">
         <link rel="stylesheet" type="text/css" id="theme" href="<c:url value="/Resources/CSS/theme-dark.css" />" >
+        
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery-ui.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/bootstrap/bootstrap.min.js" />"></script>
+
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/datatables/jquery.dataTables.min.js" />"></script>
     </head>
     <body>
         
@@ -95,6 +103,7 @@
                 <div class="page-content-wrap">
                     <div class="row">
                         <div class="col-md-12">
+
                             <!-- Injecting Our User List Here -->
                             <c:if test="${!empty UserList}">
                                 <div class="panel panel-default">
@@ -107,34 +116,39 @@
                                         </ul>
                                     </div>
                                     <div class="panel-body">
-                                        <table class="table datatable_simple">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Username</th>
-                                                    <th>Email</th>
-                                                    <th>Password</th>
-                                                    <th>Enabled?</th>
-                                                    <th>Account Valid?</th>
-                                                    <th>Password Valid?</th>
-                                                    <th>Account Unlocked?</th>
-                                                </tr>
-                                            </thead>
-                                            <c:forEach items="${UserList}" var="User">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>${User.ID}</td>
-                                                        <td>${User.getUsername()}</td>
-                                                        <td>${User.getEmail()}</td>
-                                                        <td>${User.getPassword()}</td>
-                                                        <td>${User.isEnabled()}</td>
-                                                        <td>${User.isAccountNonExpired()}</td>
-                                                        <td>${User.isCredentialsNonExpired()}</td>
-                                                        <td>${User.isAccountNonLocked()}</td>                                                       
-                                                    </tr>
-                                                </tbody>
-                                            </c:forEach>
-                                        </table>
+                                        
+                                        <!-- Begin: Datatable -->
+                                        <datatables:table htmlTableId="UserTable" htmlRowIdPrefix="User_" htmlRowIdBase="ID" data="${UserList}" dataObjectId="User" cssClass="table table-hover">
+                                            
+                                            <datatables:column title="ID" sortable="true">
+                                               <c:out value="${User.ID}" />
+                                            </datatables:column>
+
+                                            <datatables:column title="Username" sortable="true">
+                                               <c:out value="${User.getUsername()}" />
+                                            </datatables:column>
+
+                                            <datatables:column title="Email" sortable="true">
+                                               <c:out value="${User.getEmail()}" />
+                                            </datatables:column>
+                                            
+                                            <datatables:column title="Password" sortable="true">
+                                               <c:out value="${User.getPassword()}" />
+                                            </datatables:column>
+                                            
+                                            <datatables:column title="Registration IP" sortable="true">
+                                               <c:out value="${User.getCreatorIP()}" />
+                                            </datatables:column>
+                                            
+                                            <datatables:column title="Enabled?" sortable="true">
+                                               <c:out value="${User.isEnabled()}" />
+                                            </datatables:column>
+                                            
+                                            <datatables:column title="Active?" sortable="true">
+                                               <c:out value="${User.isAccountNonExpired()}" />
+                                            </datatables:column>
+
+                                        </datatables:table>
                                     </div>
                                 </div>
                             </c:if>
@@ -165,13 +179,6 @@
         <audio id="audio-alert" src="<c:url value="/Resources/Audio/alert.mp3" />" preload="auto"></audio>
         <audio id="audio-fail"  src="<c:url value="/Resources/Audio/fail.mp3"/>" preload="auto"></audio>
 
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery-ui.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/bootstrap/bootstrap.min.js" />"></script>
-
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/icheck/icheck.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/datatables/jquery.dataTables.min.js" />"></script>
 
         <script type="text/javascript" src="<c:url value="/Resources/JS/plugins.js" />"></script>
         <script type="text/javascript" src="<c:url value="/Resources/JS/actions.js" />"></script>

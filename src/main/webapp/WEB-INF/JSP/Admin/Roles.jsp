@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://github.com/tduchateau/DataTables-taglib" prefix="datatables" %>
 <%@ page session="true" %>
 
 <!DOCTYPE html>
@@ -11,6 +12,14 @@
         <title>Roles</title>
         <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/Resources/Images/favicon.png" />">
         <link rel="stylesheet" type="text/css" id="theme" href="<c:url value="/Resources/CSS/theme-dark.css" />" >
+        
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery-ui.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/bootstrap/bootstrap.min.js" />"></script>
+
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/icheck/icheck.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/datatables/jquery.dataTables.min.js" />"></script>
     </head>
     <body>
         
@@ -106,22 +115,17 @@
                                         </ul>
                                     </div>
                                     <div class="panel-body">
-                                        <table class="table datatable_simple">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                </tr>
-                                            </thead>
-                                            <c:forEach items="${RoleList}" var="Role">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>${Role.ID}</td>
-                                                        <td>${Role.getName()}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </c:forEach>
-                                        </table>
+                                        <datatables:table htmlTableId="RoleTable" htmlRowIdPrefix="Role_" htmlRowIdBase="ID" data="${RoleList}" dataObjectId="Role" cssClass="table table-hover">
+                                               
+                                            <datatables:column title="ID" sortable="true">
+                                               <c:out value="${Role.ID}" />
+                                            </datatables:column>
+
+                                            <datatables:column title="Name" sortable="true">
+                                               <c:out value="${Role.getName()}" />
+                                            </datatables:column>
+
+                                        </datatables:table>
                                     </div>
                                 </div>
                             </c:if>
@@ -151,14 +155,6 @@
 
         <audio id="audio-alert" src="<c:url value="/Resources/Audio/alert.mp3" />" preload="auto"></audio>
         <audio id="audio-fail"  src="<c:url value="/Resources/Audio/fail.mp3"/>" preload="auto"></audio>
-
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/jquery/jquery-ui.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/bootstrap/bootstrap.min.js" />"></script>
-
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/icheck/icheck.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js" />"></script>
-        <script type="text/javascript" src="<c:url value="/Resources/JS/plugins/datatables/jquery.dataTables.min.js" />"></script>
 
         <script type="text/javascript" src="<c:url value="/Resources/JS/plugins.js" />"></script>
         <script type="text/javascript" src="<c:url value="/Resources/JS/actions.js" />"></script>
