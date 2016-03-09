@@ -40,8 +40,6 @@ public class MainControllerImpl implements MainControllerService
         
         // Try To Lookup The Client Role In The Database
         if(this.hRolesService.getRoleByName("CLIENT") == null) {
-        // Maybe Take This Opportunity To Create This ROLE In The Database
-            
         // throw new RuntimeException("Couldnt Get A Pointer To The Client Role In The Database!");
             return(false);
         }

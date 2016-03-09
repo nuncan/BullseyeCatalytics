@@ -198,7 +198,7 @@ public class MainController
             userName = principal.toString();
 	}
 	return userName;
-    }
+    }    
     
     //
     //  Return User Roles

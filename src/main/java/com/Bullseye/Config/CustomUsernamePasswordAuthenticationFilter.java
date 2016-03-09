@@ -38,6 +38,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
         // If Captcha Attempt Is Bad
         if(!CaptchaAttempt.equals(CaptchaAnswer))
         {
+            // Gonna Want To Return A Page With This Warning
             throw new AuthenticationServiceException("Incorrect Captcha On Login Request");
         }
         return super.attemptAuthentication(request, response);
