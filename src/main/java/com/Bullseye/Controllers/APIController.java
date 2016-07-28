@@ -55,9 +55,4 @@ public class APIController
         }
         return(null);      
     }
-    
-    
-    //
-    //  Need To Do An API So Scripts Can Pull Data
-    //
 }
