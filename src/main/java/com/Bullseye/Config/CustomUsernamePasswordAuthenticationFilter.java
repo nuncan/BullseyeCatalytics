@@ -24,12 +24,14 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
      
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        // Need To Override This Exception Too
         super.unsuccessfulAuthentication(request, response, failed);
     }
      
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException
-    {       
+    {
+        // Note To Self: How Will This Behave If This Is Not Found ??
         String CaptchaAnswer    = hKaptcha.getGeneratedKey(request);
         String CaptchaAttempt   = request.getParameter("Captcha");
         
