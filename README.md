@@ -21,3 +21,4 @@ Includes:
 PS:
 - 100% Configured With Annotations
 - Netbeans 8
+- Read the Read Me.html for setup
