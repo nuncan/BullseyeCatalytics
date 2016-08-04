@@ -1,6 +1,6 @@
 Goal:
-  A Simple Webapp Where Users Can Sign Up, And An Admin Can Manage Them.
-  All Written With A Strong Emphasis On Security & Scalability.
+  A simple webapp where users can sign up and an admin can manage them.
+  All written with a strong emphasis on security and UX.
 
 Includes:
 
@@ -20,4 +20,4 @@ Includes:
 
 PS:
 - 100% Configured With Annotations
-- Architecture: Application -> Service -> DAO
+- Netbeans 8
