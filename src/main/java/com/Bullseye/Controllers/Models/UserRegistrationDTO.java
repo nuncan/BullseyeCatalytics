@@ -6,7 +6,11 @@ import java.util.Set;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
-
+/*
+    This model is used to capture user registration.
+    This prevents an attack senario when a malicious user would send an addition field in the post request (example: id=1)
+    in an attempt to manipulate pojo property mapping and thus populate the ID value of the entity and perform an overwrite of credentials.
+*/
 public class UserRegistrationDTO
 {
     @Size(min = 4, max = 32, message = "Username must be between 4 and 32 characters")
