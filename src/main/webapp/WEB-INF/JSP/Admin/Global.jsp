@@ -76,7 +76,7 @@
                                     <div class="list-group-status status-offline"></div>
                                     <img src="<c:url value="/Resources/Images/default_avatar.png" />" class="pull-left" alt="Darth Vader"/>
                                     <span class="contacts-title">Darth Vader</span>
-                                    <p>I want my money back!</p>
+                                    <p>This is an example message/alert</p>
                                 </a>
                             </div>
                             <div class="panel-footer text-center">

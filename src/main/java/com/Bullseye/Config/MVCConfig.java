@@ -34,6 +34,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter
 	viewResolver.setViewClass(JstlView.class);
 	viewResolver.setPrefix("/WEB-INF/JSP/");
 	viewResolver.setSuffix(".jsp");
+        
 	return viewResolver;
     }
 
@@ -59,13 +60,16 @@ public class MVCConfig extends WebMvcConfigurerAdapter
         return builder.buildSessionFactory();
     }
     
-    // Configuring Some Hibernate Properties
+    /*
+        Need an install page or something to flip this value from create on first
+        run and valdidate there on out.
+    */
     private Properties getHibernationProperties()
     {
         Properties prop = new Properties();
         prop.put("hibernate.format_sql", "true");
         prop.put("hibernate.show_sql", "true");
-        prop.put("hibernate.hbm2ddl.auto", "validate"); // CONFIG
+        prop.put("hibernate.hbm2ddl.auto", "create"); // CONFIG  [validate or create ]
         prop.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect"); // CONFIG
 
         return prop;
@@ -77,9 +81,9 @@ public class MVCConfig extends WebMvcConfigurerAdapter
     {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver"); // CONFIG
-        ds.setUrl("jdbc:mysql://localhost:3306/Bullseye"); // CONFIG
-        ds.setUsername("testuser"); // CONFIG
-        ds.setPassword("password"); // COFNIG
+        ds.setUrl("jdbc:mysql://localhost:3306/Bullseye"); // CONFIG [ You can use derby with local db in your ide, but I like PHP myadmin so I choose to use that ]
+        ds.setUsername("testuser"); // CONFIG [ This user, dont use a root acc plzzz ]
+        ds.setPassword("password"); // COFNIG [ So secure I know ]
 
         return ds;
     }
