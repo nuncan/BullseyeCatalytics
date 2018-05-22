@@ -1,4 +1,6 @@
-  A simple webapp where users can sign up and an admin can manage them.
+http://oi65.tinypic.com/xcrejk.jpg
+
+A simple webapp where users can sign up and an admin can manage them.
   All written with a strong emphasis on security and UX.
   
   Visitor analytics themed, was going to turn it into a click tracking platform.
