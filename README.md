@@ -1,3 +1,8 @@
+Update: This projects is years old and has not been maintained for a long time. 11 CVE's have come out since this was written (all spring vulns). With that said, dont expose this project to the web without updating dependencies. I have no plan to continue this. So its being archived.
+
+PS: Might be a good target to deploy locally for some pentest practice?
+
+
 http://oi65.tinypic.com/xcrejk.jpg
 
 A simple webapp where users can sign up and an admin can manage them.
