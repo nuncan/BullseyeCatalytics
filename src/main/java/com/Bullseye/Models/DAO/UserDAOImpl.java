@@ -3,9 +3,9 @@ package com.Bullseye.Models.DAO;
 import com.Bullseye.Models.Users;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 
 /*
     This Layer Is Used To Access The Database.
@@ -26,7 +26,7 @@ public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserD
         crit.setFirstResult(0);                     // Result 0 Is First Result
         crit.setMaxResults(1);                      // Result 1 Is Max Result
         // Check Result
-        if((Users)crit.uniqueResult() != null) {
+        if (crit.uniqueResult() != null) {
             return (Users)crit.uniqueResult();
         }
         else {
@@ -42,7 +42,7 @@ public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserD
         crit.setFirstResult(0);                     // Result 0 Is First Result
         crit.setMaxResults(1);                      // Result 1 Is Max Result
         // Check Result
-        if((Users)crit.uniqueResult() != null) {
+        if (crit.uniqueResult() != null) {
             return (Users)crit.uniqueResult();
         }
         else {

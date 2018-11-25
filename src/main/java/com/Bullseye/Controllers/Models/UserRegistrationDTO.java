@@ -1,14 +1,15 @@
 package com.Bullseye.Controllers.Models;
 
 import com.Bullseye.Models.Roles;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
-import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 
 /*
     This model is used to capture user registration.
-    This prevents an attack senario when a malicious user would send an addition field in the post request (example: id=1)
+    This prevents an attack scenario when a malicious user would send an addition field in the post request (example: id=1)
     in an attempt to manipulate pojo property mapping and thus populate the ID value of the entity and perform an overwrite of credentials.
 */
 public class UserRegistrationDTO

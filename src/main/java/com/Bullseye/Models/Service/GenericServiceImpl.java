@@ -1,9 +1,10 @@
 package com.Bullseye.Models.Service;
 
-import java.util.List;
 import com.Bullseye.Models.DAO.GenericDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public abstract class GenericServiceImpl<E, K> implements GenericService<E, K>

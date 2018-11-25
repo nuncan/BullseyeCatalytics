@@ -1,14 +1,15 @@
 package com.Bullseye.Controllers;
 
-import java.net.InetAddress;
 import com.Bullseye.Services.GeoIPService;
 import com.maxmind.geoip2.model.CityResponse;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
 
 @RestController
 public class APIController

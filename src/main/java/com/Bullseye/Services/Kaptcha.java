@@ -1,11 +1,12 @@
 package com.Bullseye.Services;
 
 import com.google.code.kaptcha.servlet.KaptchaExtend;
-import java.io.IOException;
+import org.springframework.stereotype.Service;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Service;
+import java.io.IOException;
 
 @Service("Kaptcha")
 public class Kaptcha extends KaptchaExtend implements KaptchaService

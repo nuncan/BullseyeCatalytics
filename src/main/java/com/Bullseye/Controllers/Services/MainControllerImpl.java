@@ -4,12 +4,13 @@ import com.Bullseye.Controllers.Models.UserRegistrationDTO;
 import com.Bullseye.Models.Service.RolesService;
 import com.Bullseye.Models.Service.UserService;
 import com.Bullseye.Models.Users;
-import javax.servlet.http.HttpServletRequest;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service("UserRegistration")
 public class MainControllerImpl implements MainControllerService 

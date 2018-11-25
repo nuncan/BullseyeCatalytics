@@ -1,8 +1,9 @@
 package com.Bullseye.Services;
 
-import java.io.InputStream;
 import com.maxmind.geoip2.DatabaseReader;
 import org.springframework.stereotype.Service;
+
+import java.io.InputStream;
 
 @Service("GeoIP")
 public class GeoIP implements GeoIPService

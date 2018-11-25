@@ -1,11 +1,12 @@
 package com.Bullseye.Models.DAO;
 
-import java.util.List;
-import java.io.Serializable;
 import org.hibernate.Criteria;
-import java.lang.reflect.Type;
-import java.lang.reflect.ParameterizedType;
 import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
 /*
     Generic DAO Implementation Class
     By Using Generic Layers I Can Load A Single Service To Handle Shared Functionality
@@ -38,7 +39,7 @@ public abstract class GenericDAOImpl <E, K extends Serializable> extends Abstrac
     @Override
     public void deleteByID(int argID)
     {
-        E hEntity = (E)getSession().load(persistentClass, argID);
+        E hEntity = getSession().load(persistentClass, argID);
         if(hEntity != null)
         {
             delete(hEntity);
@@ -48,7 +49,7 @@ public abstract class GenericDAOImpl <E, K extends Serializable> extends Abstrac
     @Override
     public E findByID(int argID)
     {
-        return (E)getSession().load(persistentClass, argID);
+        return getSession().load(persistentClass, argID);
     }
     
     @Override
