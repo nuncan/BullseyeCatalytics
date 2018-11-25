@@ -1,15 +1,10 @@
-Update: This projects is years old and has not been maintained for a long time. 11 CVE's have come out since this was written (all spring vulns). With that said, dont expose this project to the web without updating dependencies. I have no plan to continue this. So its being archived.
+Updated Nov 25th, 2018
 
-PS: Might be a good target to deploy locally for some pentest practice?
-
-
-http://oi65.tinypic.com/xcrejk.jpg
+![Dashboard](http://oi65.tinypic.com/xcrejk.jpg)
 
 A simple webapp where users can sign up and an admin can manage them.
-  All written with a strong emphasis on security and UX.
+  All written with a strong emphasis on security and UX/UI.
   
-  Visitor analytics themed, was going to turn it into a click tracking platform.
-
 Includes:
 
 - Spring
@@ -28,5 +23,5 @@ Includes:
 
 PS:
 - 100% Configured With Annotations
-- Netbeans 8
+- Netbeans 8 / IntelliJ 2018.3
 - Read the Read Me.html for setup
