@@ -12,7 +12,6 @@
     <properties>
         <springframework.version>5.1.2.RELEASE</springframework.version>
         <springsecurity.version>5.1.1.RELEASE</springsecurity.version>
-        <springsecurity.oauth.version>2.0.9.RELEASE</springsecurity.oauth.version>
     </properties>
 
     <!-- Repo Needed For JSTL Datatables -->
@@ -63,13 +62,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${springsecurity.version}</version>
-        </dependency>
-
-        <!-- Spring Security Oauth [Not Currently Being Used] -->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>${springsecurity.oauth.version}</version>
         </dependency>
 
         <!-- Hibernate Core + Validator -->
