@@ -20,8 +20,18 @@ Includes:
 - BCrypt Password Encoding (Integrated Into Spring Security)
 - User Roles
 - Remember Me
+- DAO
+- DTO
+- Abstract DAO
+- Generics
+- Fully Annontated
+- Aggregations
+- Zero XML
+- Service Orientated Architecture
+- Authentication/Authorization
+...etc
 
 PS:
 - 100% Configured With Annotations
 - Netbeans 8 / IntelliJ 2018.3
-- Read the Read Me.html for setup
+- Read the Read Me.html for DB Setup
